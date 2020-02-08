@@ -21,6 +21,8 @@ import android.widget.TextView;
 import com.example.healthassistance.R;
 import com.google.android.material.textfield.TextInputEditText;
 
+import static android.view.View.GONE;
+
 
 /**
  * A simple {@link Fragment} subclass.
@@ -30,7 +32,7 @@ public class Login extends Fragment {
     private TextInputEditText userEmailTIET,userPasswordTIET;
     private Button loginBTN;
     private TextView signUpTV;
-    private ImageView toggleBTN;
+    private ImageView toggleBTN,toggleInvisibleBTN;
     private boolean isPasswordVisible;
 
 
@@ -54,6 +56,7 @@ public class Login extends Fragment {
         loginBTN = view.findViewById(R.id.loginbtn);
         signUpTV = view.findViewById(R.id.signUpbtn);
         toggleBTN = view.findViewById(R.id.togglebtn);
+        toggleInvisibleBTN = view.findViewById(R.id.toggleinvisiblebtn);
 
         loginBTN.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -68,7 +71,7 @@ public class Login extends Fragment {
                 }
                 //Authentication
 
-                Navigation.findNavController(getActivity(),R.id.nav_graph).navigate(R.id.dashBoard);
+                Navigation.findNavController(getActivity(),R.id.nav_host_fragment).navigate(R.id.dashBoard);
             }
         });
 
@@ -76,11 +79,18 @@ public class Login extends Fragment {
             @Override
             public void onClick(View view) {
 
-                Navigation.findNavController(getActivity(),R.id.nav_graph).navigate(R.id.signUp);
+                Navigation.findNavController(getActivity(),R.id.nav_host_fragment).navigate(R.id.signUp);
             }
         });
 
         toggleBTN.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                togglePassWordVisible();
+
+            }
+        });
+        toggleInvisibleBTN.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 togglePassWordVisible();
@@ -96,12 +106,16 @@ public class Login extends Fragment {
             userPasswordTIET.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
             userPasswordTIET.setText(pass);
             userPasswordTIET.setSelection(pass.length());
+            toggleBTN.setVisibility(View.VISIBLE);
+            toggleInvisibleBTN.setVisibility(GONE);
         } else {
             String pass = userPasswordTIET.getText().toString();
             userPasswordTIET.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
             userPasswordTIET.setInputType(InputType.TYPE_CLASS_TEXT);
             userPasswordTIET.setText(pass);
             userPasswordTIET.setSelection(pass.length());
+            toggleBTN.setVisibility(GONE);
+            toggleInvisibleBTN.setVisibility(View.VISIBLE);
         }
         isPasswordVisible= !isPasswordVisible;
     }

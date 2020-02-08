@@ -51,13 +51,14 @@ public class DashBoard extends Fragment {
             @Override
             public void onClick(View view) {
 
-                Navigation.findNavController(getActivity(),R.id.nav_graph).navigate(R.id.docotr);
+                Navigation.findNavController(getActivity(),R.id.nav_host_fragment).navigate(R.id.docotr);
             }
         });
 
         prescriptionCV.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Navigation.findNavController(getActivity(),R.id.nav_host_fragment).navigate(R.id.prescription);
 
             }
         });

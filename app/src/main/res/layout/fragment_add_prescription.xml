@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".fragments.addPrescription">
+
+    <!-- TODO: Update blank fragment layout -->
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="30dp"
+        android:layout_marginTop="20dp"
+        android:text="Add Prescription"
+        android:gravity="center"/>
+    <ImageView
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_marginTop="50dp"
+        android:id="@+id/prescriptionImgV"
+        android:padding="6dp"
+        android:layout_gravity="center"
+        android:src="@drawable/pescriptioncv"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:id="@+id/pxgalleryInput"
+            android:layout_marginRight="15dp"
+            android:src="@drawable/gallery"/>
+        <ImageView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginLeft="15dp"
+            android:id="@+id/pxcameraInput"
+            android:src="@drawable/ic_camera_24dp"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="20dp"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:src="@drawable/ic_person_24dp"/>
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/prescriptionDoctorNametiet"
+            android:layout_marginLeft="10dp"
+            android:padding="5dp"
+            android:inputType="text"
+            android:hint="Enter Doctor Name"
+            android:layout_marginRight="30dp"/>
+
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="20dp"
+        android:weightSum="2"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_height="30dp"
+            android:layout_weight="0.15"
+            android:src="@drawable/ic_date_24dp"/>
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/prescriptionDatetiet"
+            android:layout_marginLeft="10dp"
+            android:padding="5dp"
+            android:layout_weight="1.3"
+            android:inputType="date"
+            android:hint="Enter date"
+            android:layout_marginRight="20dp"/>
+
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            android:id="@+id/datePickerDialog"
+            android:layout_weight="0.25"
+            android:layout_marginRight="10dp"
+            android:layout_gravity="center"
+            android:src="@drawable/tapicon"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:gravity="center"
+        android:weightSum="2"
+        android:orientation="horizontal">
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:padding="4dp"
+            android:layout_marginRight="5dp"
+            android:layout_marginLeft="20dp"
+            android:id="@+id/prescriptionCancelbtn"
+            android:layout_marginTop="5dp"
+            android:text="Cancel"/>
+
+        <Button
+            android:id="@+id/prescriptionSavebtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginRight="20dp"
+            android:layout_weight="1"
+            android:padding="4dp"
+            android:text="Save" />
+
+    </LinearLayout>
+
+
+</LinearLayout>

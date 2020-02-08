@@ -15,21 +15,19 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.example.healthassistance.R;
-import com.example.healthassistance.pojos.DoctorPojo;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class Docotr extends Fragment {
-    private RecyclerView doctorRV;
-    private FloatingActionButton addDoctorFABTN;
-    private TextView addDoctorTV;
-    private DoctorPojo doctorPojo;
+public class Prescription extends Fragment {
+    private RecyclerView prescriptionRV;
+    private TextView addPrescriptionTV;
+    private FloatingActionButton addPrescriptionFABTN;
 
 
-    public Docotr() {
+    public Prescription() {
         // Required empty public constructor
     }
 
@@ -38,32 +36,30 @@ public class Docotr extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_docotr, container, false);
+        return inflater.inflate(R.layout.fragment_prescription, container, false);
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        doctorRV = view.findViewById(R.id.doctorRv);
-        addDoctorFABTN = view.findViewById(R.id.addDoctorfabtn);
-        addDoctorTV = view.findViewById(R.id.addDoctortv);
 
-        if (doctorPojo == null){
-            addDoctorTV.setVisibility(View.VISIBLE);
-        }
+        prescriptionRV = view.findViewById(R.id.prescriptionRv);
+        addPrescriptionTV = view.findViewById(R.id.addPrescriptiontv);
+        addPrescriptionFABTN = view.findViewById(R.id.addPrescriptionfabtn);
 
-        addDoctorTV.setOnClickListener(new View.OnClickListener() {
+        addPrescriptionTV.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Navigation.findNavController(getActivity(),R.id.nav_host_fragment).navigate(R.id.addDoctor);
+                Navigation.findNavController(getActivity(),R.id.nav_host_fragment).navigate(R.id.addPrescription);
             }
         });
 
-        addDoctorFABTN.setOnClickListener(new View.OnClickListener() {
+        addPrescriptionFABTN.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Navigation.findNavController(getActivity(),R.id.nav_host_fragment).navigate(R.id.addDoctor);
+                Navigation.findNavController(getActivity(),R.id.nav_host_fragment).navigate(R.id.addPrescription);
             }
         });
+
     }
 }

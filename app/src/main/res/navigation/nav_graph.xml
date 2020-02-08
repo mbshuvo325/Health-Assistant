@@ -30,4 +30,14 @@
         android:name="com.example.healthassistance.fragments.addDoctor"
         android:label="fragment_add_doctor"
         tools:layout="@layout/fragment_add_doctor" />
+    <fragment
+        android:id="@+id/prescription"
+        android:name="com.example.healthassistance.fragments.Prescription"
+        android:label="fragment_prescription"
+        tools:layout="@layout/fragment_prescription" />
+    <fragment
+        android:id="@+id/addPrescription"
+        android:name="com.example.healthassistance.fragments.addPrescription"
+        android:label="fragment_add_prescription"
+        tools:layout="@layout/fragment_add_prescription" />
 </navigation>

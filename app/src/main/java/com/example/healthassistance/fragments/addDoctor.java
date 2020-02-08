@@ -6,11 +6,13 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.Navigation;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 
 import com.example.healthassistance.R;
 import com.example.healthassistance.pojos.DoctorPojo;
@@ -22,7 +24,8 @@ import com.google.android.material.textfield.TextInputEditText;
  */
 public class addDoctor extends Fragment {
     private TextInputEditText docotrNameTIET,hospitalNameTIET,phoneNumberTIET;
-    private Button cameraInputImageBTN,galleryInputImageBTN,saveDocotrBTN,cancelBTN;
+    private Button saveDocotrBTN,cancelBTN;
+    private ImageView cameraInputImage,galleryInputImage;
     private DoctorPojo docotrpojo;
 
 
@@ -45,19 +48,19 @@ public class addDoctor extends Fragment {
         docotrNameTIET = view.findViewById(R.id.doctorNametiet);
         hospitalNameTIET = view.findViewById(R.id.hospitaltiet);
         phoneNumberTIET = view.findViewById(R.id.phoneNumbertiet);
-        cameraInputImageBTN = view.findViewById(R.id.imageInputCamera);
-        galleryInputImageBTN = view.findViewById(R.id.imageInputGallery);
+        cameraInputImage = view.findViewById(R.id.docotrCameraInput);
+        galleryInputImage = view.findViewById(R.id.docotrGalleryInput);
         saveDocotrBTN = view.findViewById(R.id.saveDoctorbtn);
         cancelBTN = view.findViewById(R.id.cancelbtn);
 
-        cameraInputImageBTN.setOnClickListener(new View.OnClickListener() {
+        cameraInputImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 //use for camera
             }
         });
 
-        galleryInputImageBTN.setOnClickListener(new View.OnClickListener() {
+        galleryInputImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 //use for gallery input
@@ -73,8 +76,15 @@ public class addDoctor extends Fragment {
                 if (doctorName.isEmpty()){
                     docotrNameTIET.setError("Must Give a Name..!");
                 }else{
-                    docotrpojo = new DoctorPojo(null,doctorName,hospitaName,phoneNumber);
+                      docotrpojo = new DoctorPojo(null,doctorName,hospitaName,phoneNumber);
                 }
+            }
+        });
+
+        cancelBTN.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Navigation.findNavController(getActivity(),R.id.nav_host_fragment).navigate(R.id.docotr);
             }
         });
     }

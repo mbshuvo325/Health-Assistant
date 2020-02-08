@@ -51,7 +51,7 @@ public class SignUp extends Fragment {
             @Override
             public void onClick(View view) {
                 //Authentication
-                Navigation.findNavController(getActivity(),R.id.nav_graph).navigate(R.id.dashBoard);
+                Navigation.findNavController(getActivity(),R.id.nav_host_fragment).navigate(R.id.dashBoard);
             }
         });
     }
