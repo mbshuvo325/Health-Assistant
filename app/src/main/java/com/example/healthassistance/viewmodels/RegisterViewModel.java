@@ -10,22 +10,21 @@ public class RegisterViewModel extends ViewModel {
     public enum AuthenticationState{
         AUTHENTICATED,UNAUTHENTICATED
     }
-    private RegisterRepository registerRepository;
+   private RegisterRepository registerRepository;
     public MutableLiveData<AuthenticationState> stateLiveData;
-    public MutableLiveData<String >errorMsg = new MutableLiveData<>();
+    public MutableLiveData<String > errormsg = new MutableLiveData<>();
 
-    public RegisterViewModel(){
+    public RegisterViewModel() {
         stateLiveData = new MutableLiveData<>();
-        registerRepository = new RegisterRepository(stateLiveData);
-        errorMsg = registerRepository.getErrorMsg();
+       registerRepository = new RegisterRepository();
+       errormsg = registerRepository.getErrormsg();
         if (registerRepository.getFirebaseUser() != null){
             stateLiveData.postValue(AuthenticationState.AUTHENTICATED);
-        }else{
+        }else {
             stateLiveData.postValue(AuthenticationState.UNAUTHENTICATED);
         }
     }
-
-    public void register(String email, String password){
-       stateLiveData = registerRepository.RegisterFirebaseUser(email, password);
+    public void Register(String email, String password){
+        registerRepository.RegisterUser(email,password);
     }
 }

@@ -62,16 +62,16 @@ public class SignUp extends Fragment {
                 String userName = userNameTIET.getText().toString();
                 String email = userEmailTIET.getText().toString();
                 String password = userPasswordTIET.getText().toString();
-                registerViewModel.register(email,password);
+                registerViewModel.Register(email,password);
             }
         });
 
-        registerViewModel.stateLiveData.observe(this, new Observer<RegisterViewModel.AuthenticationState>() {
+        registerViewModel.stateLiveData.observe(this.getActivity(), new Observer<RegisterViewModel.AuthenticationState>() {
             @Override
             public void onChanged(RegisterViewModel.AuthenticationState authenticationState) {
                 switch (authenticationState){
                     case AUTHENTICATED:
-                        Navigation.findNavController(getActivity(),R.id.nav_host_fragment).navigate(R.id.dashBoard);
+                        Navigation.findNavController(getActivity(),R.id.nav_host_fragment).navigate(R.id.login);
                         break;
                     case UNAUTHENTICATED:
 
@@ -79,7 +79,7 @@ public class SignUp extends Fragment {
                 }
             }
         });
-        registerViewModel.errorMsg.observe(this, new Observer<String>() {
+        registerViewModel.errormsg.observe(this.getActivity(), new Observer<String>() {
             @Override
             public void onChanged(String s) {
                 statusTV.setText(s);

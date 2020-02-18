@@ -81,7 +81,7 @@ public class Login extends Fragment {
 
             }
         });
-        loginViewmodel.stateLivaData.observe(this, new Observer<LoginViewmodel.AuthenticationState>() {
+        loginViewmodel.stateLiveData.observe(this.getActivity(), new Observer<LoginViewmodel.AuthenticationState>() {
             @Override
             public void onChanged(LoginViewmodel.AuthenticationState authenticationState) {
                 switch (authenticationState){
@@ -94,7 +94,7 @@ public class Login extends Fragment {
                 }
             }
         });
-        loginViewmodel.errorMsg.observe(this, new Observer<String>() {
+        loginViewmodel.errormsg.observe(this.getActivity(), new Observer<String>() {
             @Override
             public void onChanged(String s) {
                 statusTV.setText(s);

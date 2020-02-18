@@ -4,28 +4,34 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import com.example.healthassistance.repos.LoginRepository;
+import com.google.firebase.auth.FirebaseAuth;
 
 public class LoginViewmodel extends ViewModel {
-
     public enum AuthenticationState{
         AUTHENTICATED,UNAUTHENTICATED
     }
     private LoginRepository loginRepository;
-    public MutableLiveData<AuthenticationState> stateLivaData;
-    public MutableLiveData<String > errorMsg = new MutableLiveData<>();
+    public MutableLiveData<AuthenticationState> stateLiveData;
+    public MutableLiveData<String > errormsg = new MutableLiveData<>();
 
-    public LoginViewmodel(){
-        stateLivaData = new MutableLiveData<>();
-        loginRepository = new LoginRepository(stateLivaData);
-        errorMsg = loginRepository.getErrorMsg();
+    public LoginViewmodel() {
+        stateLiveData = new MutableLiveData<>();
+        loginRepository = new LoginRepository(stateLiveData);
+        errormsg = loginRepository.getErrormsg();
         if (loginRepository.getFirebaseUser() != null){
-            stateLivaData.postValue(AuthenticationState.AUTHENTICATED);
-        }else{
-            stateLivaData.postValue(AuthenticationState.UNAUTHENTICATED);
+            stateLiveData.postValue(AuthenticationState.AUTHENTICATED);
+        }else {
+            stateLiveData.postValue(AuthenticationState.UNAUTHENTICATED);
         }
+    }
 
-    }
     public void Login(String email, String password){
-       stateLivaData = loginRepository.loginFireBaseUser(email, password);
+        loginRepository.loginUser(email,password);
     }
+
+    public void LogOutUser(){
+        FirebaseAuth.getInstance().signOut();
+        stateLiveData.postValue(AuthenticationState.UNAUTHENTICATED);
+    }
+
 }

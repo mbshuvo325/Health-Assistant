@@ -12,44 +12,43 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
 public class LoginRepository {
+
     private FirebaseAuth firebaseAuth;
     private FirebaseUser firebaseUser;
-    private MutableLiveData<LoginViewmodel.AuthenticationState> stateLivaData;
-    public MutableLiveData<String > errorMsg = new MutableLiveData<>();
+    public MutableLiveData<LoginViewmodel.AuthenticationState> stateLiveData;
+    public MutableLiveData<String > errormsg = new MutableLiveData<>();
 
-    public LoginRepository(MutableLiveData<LoginViewmodel.AuthenticationState> stateLivaData) {
+    public LoginRepository(MutableLiveData<LoginViewmodel.AuthenticationState> stateLiveData) {
         firebaseAuth = FirebaseAuth.getInstance();
         firebaseUser = firebaseAuth.getCurrentUser();
-        this.stateLivaData = stateLivaData;
+        this.stateLiveData = stateLiveData;
     }
-
-    public MutableLiveData<LoginViewmodel.AuthenticationState> loginFireBaseUser(String email, String password) {
-        firebaseAuth.signInWithEmailAndPassword(email, password)
+    public MutableLiveData<LoginViewmodel.AuthenticationState> loginUser(String email, String password){
+        firebaseAuth.signInWithEmailAndPassword(email,password)
                 .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()){
                             firebaseUser = firebaseAuth.getCurrentUser();
-                            stateLivaData.postValue(LoginViewmodel.AuthenticationState.AUTHENTICATED);
+                            stateLiveData.postValue(LoginViewmodel.AuthenticationState.AUTHENTICATED);
                         }
                     }
                 }).addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception e) {
-                stateLivaData.postValue(LoginViewmodel.AuthenticationState.UNAUTHENTICATED);
-                errorMsg.postValue(e.getLocalizedMessage());
+                stateLiveData.postValue(LoginViewmodel.AuthenticationState.UNAUTHENTICATED);
+                errormsg.postValue(e.getLocalizedMessage());
             }
         });
-
-        return stateLivaData;
-     }
+        return stateLiveData;
+    }
 
     public FirebaseUser getFirebaseUser() {
         return firebaseUser;
     }
 
-    public MutableLiveData<String> getErrorMsg() {
-        return errorMsg;
+    public MutableLiveData<String> getErrormsg() {
+        return errormsg;
     }
 }
 
