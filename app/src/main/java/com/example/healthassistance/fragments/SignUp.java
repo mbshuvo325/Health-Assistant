@@ -6,14 +6,18 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProviders;
 import androidx.navigation.Navigation;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.TextView;
 
 import com.example.healthassistance.R;
+import com.example.healthassistance.viewmodels.RegisterViewModel;
 import com.google.android.material.textfield.TextInputEditText;
 
 
@@ -24,6 +28,8 @@ public class SignUp extends Fragment {
 
     private TextInputEditText userNameTIET,userPasswordTIET,userEmailTIET,userConPasswordTIET;
     private Button signUpBTN;
+    private TextView statusTV;
+    private RegisterViewModel registerViewModel;
 
 
     public SignUp() {
@@ -35,6 +41,7 @@ public class SignUp extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
+        registerViewModel = ViewModelProviders.of(this).get(RegisterViewModel.class);
         return inflater.inflate(R.layout.fragment_sign_up, container, false);
     }
 
@@ -43,6 +50,7 @@ public class SignUp extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         userNameTIET = view.findViewById(R.id.useNameeT);
         userEmailTIET = view.findViewById(R.id.UserEmaileT);
+        statusTV = view.findViewById(R.id.errortv);
         userPasswordTIET = view.findViewById(R.id.userPasseT);
         userConPasswordTIET = view.findViewById(R.id.userConPasset);
         signUpBTN = view.findViewById(R.id.signUpbtn);
@@ -51,7 +59,30 @@ public class SignUp extends Fragment {
             @Override
             public void onClick(View view) {
                 //Authentication
-                Navigation.findNavController(getActivity(),R.id.nav_host_fragment).navigate(R.id.dashBoard);
+                String userName = userNameTIET.getText().toString();
+                String email = userEmailTIET.getText().toString();
+                String password = userPasswordTIET.getText().toString();
+                registerViewModel.register(email,password);
+            }
+        });
+
+        registerViewModel.stateLiveData.observe(this, new Observer<RegisterViewModel.AuthenticationState>() {
+            @Override
+            public void onChanged(RegisterViewModel.AuthenticationState authenticationState) {
+                switch (authenticationState){
+                    case AUTHENTICATED:
+                        Navigation.findNavController(getActivity(),R.id.nav_host_fragment).navigate(R.id.dashBoard);
+                        break;
+                    case UNAUTHENTICATED:
+
+                        break;
+                }
+            }
+        });
+        registerViewModel.errorMsg.observe(this, new Observer<String>() {
+            @Override
+            public void onChanged(String s) {
+                statusTV.setText(s);
             }
         });
     }
